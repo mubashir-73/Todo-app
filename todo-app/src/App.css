@@ -36,6 +36,17 @@
   background-color: #cc241d;
 }
 
+.butts {
+  display: flex;
+}
+
+#myInput {
+  margin-left: 40px;
+  border-radius: 10px;
+  width: 400px;
+  align-content: center;
+}
+
 .todosep {
   margin: 0;
   border: none;
@@ -47,8 +58,9 @@
 }
 
 .todo {
+  margin-top: 40px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 30px;
+  margin-left: 60px;
 }
