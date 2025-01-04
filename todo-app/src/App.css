@@ -19,30 +19,33 @@
   display: flex;
   flex-direction: row;
   height: 100vw;
+  background-color: #282828;
 }
 
 .add {
   font-size: 16px;
   padding: 0;
-  font-weight: 600;
+  font-weight: 400;
   background-color: whitesmoke;
-  width: 120px;
-  height: 50px;
+  width: 200px;
+  height: 40px;
 }
 .navsep {
   margin: 0;
   border: none;
+  box-shadow:
+    0px 2px 4px 0px rgba(0, 0, 0, 0.3),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   width: 1px;
-  background-color: #cc241d;
 }
 
-.butts {
+.forms {
   display: flex;
+  gap: 20px;
 }
 
 #myInput {
-  margin-left: 40px;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 400px;
   align-content: center;
 }
@@ -51,16 +54,19 @@
   margin: 0;
   border: none;
   height: 1px;
+
+  box-shadow:
+    0px 2px 1px 0px rgba(0, 0, 0, 0.3),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   width: 100%px;
-  background-color: #cc241d;
   margin-top: 10px;
   margin-bottom: 31.4px;
 }
 
 .todo {
-  margin-top: 40px;
+  padding-top: 40px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 60px;
+  padding-left: 60px;
 }
