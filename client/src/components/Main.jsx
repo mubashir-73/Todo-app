@@ -1,27 +1,35 @@
 import { useEffect, useState } from "react";
 import image from "../assets/pngwing.com (2).png";
+import useAuth from "../hooks/useAuth";
 
 export default function Main() {
-  /**
-   * Challenge: Update our app so that when the user enters a
-   * new ingredient and submits the form, it adds that new
-   * ingredient to our list!
-   */
+  const { auth } = useAuth();
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        fetch("http://localhost:5000/api/tasks/")
-          .then((response) => response.json()) // Parse JSON
-          .then((data) => {
-            setTasks(data); // Extract "task" field from the JSON array
-          });
-      } catch {
-        throw new Error("Error fetching tasks from api");
+        console.log(auth?.authToken); // Debugging
+        const response = await fetch("http://localhost:5000/api/tasks/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.authToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setTasks(data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+        throw new Error("Error fetching tasks from API");
       }
     };
     fetchTasks();
-  }, []);
+  }, [auth]);
 
   function handleSubmit(event) {
     /**
@@ -37,17 +45,24 @@ export default function Main() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.authToken}`,
         },
         body: JSON.stringify({ task: newTask }),
-      });
+      })
+        .then((response) => response.json())
+        .then((savedTask) => {
+          setTasks((prevTasks) => [...prevTasks, savedTask]);
+        });
     } catch (error) {
       console.error("Error adding task:", error);
     }
-    setTasks((prevTasks) => [...prevTasks, newTask]);
   }
+
   const tasksListItems = tasks.map((task, index) => (
     <li key={index} id={index}>
-      <div className="taskname">{task.task}</div>
+      <div className="taskname" contentEditable="true">
+        {task.task}
+      </div>
       <img onClick={() => deleteTask(task._id, index)} src={image} />
     </li>
   ));
@@ -56,6 +71,10 @@ export default function Main() {
     try {
       fetch(`http://localhost:5000/api/tasks/${taskId}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.authToken}`,
+        },
       }).then(
         setTasks((prevtask) =>
           prevtask.filter((_, index) => index !== indexToDelete),
@@ -75,11 +94,14 @@ export default function Main() {
           aria-label="Add task"
           name="task"
         />
-        <button>Add ingredient</button>
+        <button>Add Task</button>
       </form>
-      <ul className="List">{tasksListItems}</ul>
+
+      <ul className="List">
+        <h1>Your Tasks</h1>
+        {tasksListItems}
+      </ul>
     </main>
   );
 }
-
-//BUG: Name of latest task is not displaying in card view.
+//TODO: Create an update icon for each task which will send a put request

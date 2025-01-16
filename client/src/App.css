@@ -10,7 +10,7 @@ body {
 
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 11px;
   height: 80px;
@@ -20,11 +20,76 @@ header {
     0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 }
 
-header > img {
+.hide {
+  display: none;
+}
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Show instructions dynamically */
+.loginbox .instructions {
+  opacity: 1;
+  height: auto; /* Allow content to take up space */
+}
+
+.instructions {
+  color: #555;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: opacity 0.3s ease; /* Smooth fade-in */
+  /*background-color: black;*/
+  /*color: white;*/
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+  color: white;
+  background-color: black;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.leftside {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.navmenu {
+  margin-right: 20px;
+}
+
+#Navlist {
+  display: flex;
+  gap: 10px;
+}
+
+.navmenu > ul > li {
+  list-style-type: none;
+}
+
+header > .leftside > img {
   width: 50px;
 }
 
-header > h1 {
+header > .leftside > h1 {
   font-weight: 400;
 }
 
@@ -82,9 +147,109 @@ main {
   width: 25px;
   height: 25px;
 }
+
 .List {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.loginpage {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  height: 70vw;
+  width: 100vw;
+}
+
+.loginbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  border: 1px solid #d1d5db;
+  border-radius: 15px;
+  background-color: white;
+  max-height: 620px;
+  height: 550px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 40px;
+  width: 600px;
+}
+
+.loginform {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  height: 250px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.checker {
+  gap: 3px;
+  display: flex;
+}
+
+.loginform > label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+  min-width: 150px;
+  max-width: 400px;
+}
+
+.loginform > label > input {
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  padding: 9px 13px;
+  flex-grow: 1;
+  min-width: 150px;
+  max-width: 400px;
+  max-height: 50px;
+}
+
+#loginbtn {
+  align-self: center;
+  font-family: Inter, sans-serif;
+  border-radius: 6px;
+  border: none;
+  background-color: #141413;
+  color: #fafaf8;
+  width: 150px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  height: 50px;
+}
+
+#registerbtn {
+  height: 50px;
+}
+
+#registerbtn:disabled {
+  opacity: 0.6;
+}
+
+.btnspace {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginform > .btnspace > button {
+  align-self: center;
+  font-family: Inter, sans-serif;
+  border-radius: 6px;
+  border: none;
+  background-color: #141413;
+  color: #fafaf8;
+  width: 150px;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
