@@ -1,9 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Login() {
   const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/main";
   const userRef = useRef();
   const errRef = useRef();
 
@@ -48,6 +52,7 @@ export default function Login() {
           setAuth({ authToken });
           console.log("Login successful:", data);
           setSuccess(true);
+          navigate(from, { replace: true });
           return authToken;
         });
     } catch (error) {
