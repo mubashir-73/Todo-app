@@ -9,13 +9,16 @@ export default function Main() {
     const fetchTasks = async () => {
       try {
         console.log(auth?.authToken); // Debugging
-        const response = await fetch("http://localhost:5000/api/tasks/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.authToken}`,
+        const response = await fetch(
+          "https://todo-app-mubashir-73.onrender.com/api/tasks/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${auth.authToken}`,
+            },
           },
-        });
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -41,7 +44,7 @@ export default function Main() {
     const formData = new FormData(event.currentTarget);
     const newTask = formData.get("task");
     try {
-      fetch("http://localhost:5000/api/tasks/", {
+      fetch("https://todo-app-mubashir-73.onrender.com/api/tasks/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +72,7 @@ export default function Main() {
 
   function deleteTask(taskId, indexToDelete) {
     try {
-      fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+      fetch(`https://todo-app-mubashir-73.onrender.com/api/tasks/${taskId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
